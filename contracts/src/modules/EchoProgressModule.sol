@@ -41,6 +41,7 @@ contract EchoProgressModule is AccessControl {
          * @dev Grant `DEFAULT_ADMIN_ROLE` to `_owner`.
          */
         _grantRole(DEFAULT_ADMIN_ROLE, _owner);
+        _grantRole(PROGRESS_CONTROLLER_ROLE, _owner);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -80,7 +81,7 @@ contract EchoProgressModule is AccessControl {
     function _levelFromXp(uint256 _xp) internal pure returns (uint256) {
         if (_xp == 0) return 0;
 
-        uint256 scaled = (_xp / BASE_XP) / SCALE;
+        uint256 scaled = Math.mulDiv(_xp, SCALE, BASE_XP);
         return Math.sqrt(scaled) / SQRT_SCALE;
     }
 }

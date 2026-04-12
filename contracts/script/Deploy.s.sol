@@ -8,6 +8,7 @@ import {EchoERC721} from "@echo/EchoERC721.sol";
 import {EchoFactory} from "@echo/EchoFactory.sol";
 import {EchoGenesis} from "@echo/EchoGenesis.sol";
 import {EchoLifeCycleModule} from "@modules/EchoLifeCycleModule.sol";
+import {EchoProgressModule} from "@modules/EchoProgressModule.sol";
 
 import {Actors} from "./utils/Actors.s.sol";
 import {Packages} from "./utils/Packages.s.sol";
@@ -60,6 +61,7 @@ contract Deploy is Actors, Packages {
         echoERC721.grantRole(echoERC721.MINTER_ROLE(), address(echoFactory));
         echoERC721.revokeRole(echoERC721.MINTER_ROLE(), address(deployer.addr));
 
+        echoProgressModule.grantRole(echoProgressModule.PROGRESS_CONTROLLER_ROLE(), address(echoLifeCycleModule));
         echoGenesis.grantRole(echoGenesis.FACTORY_ROLE(), address(echoFactory));
 
         stop();

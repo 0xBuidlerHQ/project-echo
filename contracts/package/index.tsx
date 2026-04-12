@@ -1019,7 +1019,7 @@ export const echoAccountAbi = [
 export const echoErc721Abi = [
   {
     type: 'constructor',
-    inputs: [{ name: 'owner', internalType: 'address', type: 'address' }],
+    inputs: [{ name: '_owner', internalType: 'address', type: 'address' }],
     stateMutability: 'nonpayable',
   },
   {
@@ -1099,7 +1099,7 @@ export const echoErc721Abi = [
   },
   {
     type: 'function',
-    inputs: [{ name: 'to', internalType: 'address', type: 'address' }],
+    inputs: [{ name: '_to', internalType: 'address', type: 'address' }],
     name: 'mint',
     outputs: [{ name: 'tokenId', internalType: 'uint256', type: 'uint256' }],
     stateMutability: 'nonpayable',
@@ -1425,7 +1425,7 @@ export const echoErc721Abi = [
  *
  */
 export const echoErc721Address = {
-  31337: '0x1f04Fe8498383B117C9632E4C1A2e1768ae46067',
+  31337: '0xf6B55614076BA5D1C1bc737FEAC29D8c76FE1bb1',
 } as const
 
 /**
@@ -1452,16 +1452,13 @@ export const echoFactoryAbi = [
         internalType: 'contract EchoERC721',
         type: 'address',
       },
-      { name: '_echo', internalType: 'contract Echo', type: 'address' },
+      {
+        name: '_echoGenesis',
+        internalType: 'contract EchoGenesis',
+        type: 'address',
+      },
     ],
     stateMutability: 'nonpayable',
-  },
-  {
-    type: 'function',
-    inputs: [],
-    name: 'echo',
-    outputs: [{ name: '', internalType: 'contract Echo', type: 'address' }],
-    stateMutability: 'view',
   },
   {
     type: 'function',
@@ -1469,6 +1466,15 @@ export const echoFactoryAbi = [
     name: 'echoERC721',
     outputs: [
       { name: '', internalType: 'contract EchoERC721', type: 'address' },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'echoGenesis',
+    outputs: [
+      { name: '', internalType: 'contract EchoGenesis', type: 'address' },
     ],
     stateMutability: 'view',
   },
@@ -1489,8 +1495,8 @@ export const echoFactoryAbi = [
             type: 'address',
           },
           {
-            name: 'echo',
-            internalType: 'struct Echo.s_Echo',
+            name: 'echoGenesis',
+            internalType: 'struct EchoGenesis.s_EchoGenesis',
             type: 'tuple',
             components: [
               { name: '_initialized', internalType: 'bool', type: 'bool' },
@@ -1508,7 +1514,7 @@ export const echoFactoryAbi = [
     inputs: [
       {
         name: '_params',
-        internalType: 'struct Echo.s_Params',
+        internalType: 'struct EchoGenesis.s_Params',
         type: 'tuple',
         components: [{ name: 'name', internalType: 'string', type: 'string' }],
       },
@@ -1546,8 +1552,8 @@ export const echoFactoryAbi = [
             type: 'address',
           },
           {
-            name: 'echo',
-            internalType: 'struct Echo.s_Echo',
+            name: 'echoGenesis',
+            internalType: 'struct EchoGenesis.s_EchoGenesis',
             type: 'tuple',
             components: [
               { name: '_initialized', internalType: 'bool', type: 'bool' },
@@ -1567,7 +1573,7 @@ export const echoFactoryAbi = [
  *
  */
 export const echoFactoryAddress = {
-  31337: '0x3DDD6a6d07896Fd4b1C20542E54C997797d611AB',
+  31337: '0x1C6dDd12225B411f20d6dCAf45113de632166FAd',
 } as const
 
 /**
@@ -1579,9 +1585,248 @@ export const echoFactoryConfig = {
 } as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// EchoGenesis
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/**
+ *
+ */
+export const echoGenesisAbi = [
+  {
+    type: 'constructor',
+    inputs: [{ name: '_owner', internalType: 'address', type: 'address' }],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'DEFAULT_ADMIN_ROLE',
+    outputs: [{ name: '', internalType: 'bytes32', type: 'bytes32' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'FACTORY_ROLE',
+    outputs: [{ name: '', internalType: 'bytes32', type: 'bytes32' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    name: 'echosGenesis',
+    outputs: [
+      { name: '_initialized', internalType: 'bool', type: 'bool' },
+      { name: 'name', internalType: 'string', type: 'string' },
+      { name: 'birthEpoch', internalType: 'uint256', type: 'uint256' },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: '_echoId', internalType: 'uint256', type: 'uint256' }],
+    name: 'getEchoGenesis',
+    outputs: [
+      {
+        name: 'echo',
+        internalType: 'struct EchoGenesis.s_EchoGenesis',
+        type: 'tuple',
+        components: [
+          { name: '_initialized', internalType: 'bool', type: 'bool' },
+          { name: 'name', internalType: 'string', type: 'string' },
+          { name: 'birthEpoch', internalType: 'uint256', type: 'uint256' },
+        ],
+      },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'role', internalType: 'bytes32', type: 'bytes32' }],
+    name: 'getRoleAdmin',
+    outputs: [{ name: '', internalType: 'bytes32', type: 'bytes32' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'role', internalType: 'bytes32', type: 'bytes32' },
+      { name: 'account', internalType: 'address', type: 'address' },
+    ],
+    name: 'grantRole',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'role', internalType: 'bytes32', type: 'bytes32' },
+      { name: 'account', internalType: 'address', type: 'address' },
+    ],
+    name: 'hasRole',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: '_echoId', internalType: 'uint256', type: 'uint256' },
+      {
+        name: '_params',
+        internalType: 'struct EchoGenesis.s_Params',
+        type: 'tuple',
+        components: [{ name: 'name', internalType: 'string', type: 'string' }],
+      },
+    ],
+    name: 'initialize',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'role', internalType: 'bytes32', type: 'bytes32' },
+      { name: 'callerConfirmation', internalType: 'address', type: 'address' },
+    ],
+    name: 'renounceRole',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'role', internalType: 'bytes32', type: 'bytes32' },
+      { name: 'account', internalType: 'address', type: 'address' },
+    ],
+    name: 'revokeRole',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'interfaceId', internalType: 'bytes4', type: 'bytes4' }],
+    name: 'supportsInterface',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'echoId',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: true,
+      },
+      {
+        name: 'echo',
+        internalType: 'struct EchoGenesis.s_EchoGenesis',
+        type: 'tuple',
+        components: [
+          { name: '_initialized', internalType: 'bool', type: 'bool' },
+          { name: 'name', internalType: 'string', type: 'string' },
+          { name: 'birthEpoch', internalType: 'uint256', type: 'uint256' },
+        ],
+        indexed: false,
+      },
+    ],
+    name: 'EchoInitialized',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'role', internalType: 'bytes32', type: 'bytes32', indexed: true },
+      {
+        name: 'previousAdminRole',
+        internalType: 'bytes32',
+        type: 'bytes32',
+        indexed: true,
+      },
+      {
+        name: 'newAdminRole',
+        internalType: 'bytes32',
+        type: 'bytes32',
+        indexed: true,
+      },
+    ],
+    name: 'RoleAdminChanged',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'role', internalType: 'bytes32', type: 'bytes32', indexed: true },
+      {
+        name: 'account',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'sender',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+    ],
+    name: 'RoleGranted',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'role', internalType: 'bytes32', type: 'bytes32', indexed: true },
+      {
+        name: 'account',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'sender',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+    ],
+    name: 'RoleRevoked',
+  },
+  { type: 'error', inputs: [], name: 'AccessControlBadConfirmation' },
+  {
+    type: 'error',
+    inputs: [
+      { name: 'account', internalType: 'address', type: 'address' },
+      { name: 'neededRole', internalType: 'bytes32', type: 'bytes32' },
+    ],
+    name: 'AccessControlUnauthorizedAccount',
+  },
+  { type: 'error', inputs: [], name: 'EchoGenesisAlreadyInitialized' },
+] as const
+
+/**
+ *
+ */
+export const echoGenesisAddress = {
+  31337: '0xb302EB0Dd6A7f6dFA228e669b80fE5e2120B2e87',
+} as const
+
+/**
+ *
+ */
+export const echoGenesisConfig = {
+  address: echoGenesisAddress,
+  abi: echoGenesisAbi,
+} as const
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // EchoLifeCycleModule
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+/**
+ *
+ */
 export const echoLifeCycleModuleAbi = [
   {
     type: 'constructor',
@@ -1599,13 +1844,6 @@ export const echoLifeCycleModuleAbi = [
     type: 'function',
     inputs: [],
     name: 'DEFAULT_ADMIN_ROLE',
-    outputs: [{ name: '', internalType: 'bytes32', type: 'bytes32' }],
-    stateMutability: 'view',
-  },
-  {
-    type: 'function',
-    inputs: [],
-    name: 'LIFECYCLE_MANAGER_ROLE',
     outputs: [{ name: '', internalType: 'bytes32', type: 'bytes32' }],
     stateMutability: 'view',
   },
@@ -1635,17 +1873,11 @@ export const echoLifeCycleModuleAbi = [
         internalType: 'struct EchoLifeCycleModule.s_EchoLifeCycle',
         type: 'tuple',
         components: [
-          { name: 'lastPetAt', internalType: 'uint256', type: 'uint256' },
+          { name: 'hasBeenPetted', internalType: 'bool', type: 'bool' },
+          { name: 'lastPettedCycle', internalType: 'uint256', type: 'uint256' },
         ],
       },
     ],
-    stateMutability: 'view',
-  },
-  {
-    type: 'function',
-    inputs: [{ name: '_echoId', internalType: 'uint256', type: 'uint256' }],
-    name: 'getLastPetAt',
-    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
     stateMutability: 'view',
   },
   {
@@ -1714,6 +1946,13 @@ export const echoLifeCycleModuleAbi = [
     inputs: [{ name: 'interfaceId', internalType: 'bytes4', type: 'bytes4' }],
     name: 'supportsInterface',
     outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: '_echoId', internalType: 'uint256', type: 'uint256' }],
+    name: 'timeBeforeDeath',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
     stateMutability: 'view',
   },
   {
@@ -1807,6 +2046,11 @@ export const echoLifeCycleModuleAbi = [
   {
     type: 'error',
     inputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    name: 'EchoAlreadyPettedForCurrentCycle',
+  },
+  {
+    type: 'error',
+    inputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
     name: 'EchoIsDead',
   },
   {
@@ -1815,6 +2059,21 @@ export const echoLifeCycleModuleAbi = [
     name: 'NotEchoAccount',
   },
 ] as const
+
+/**
+ *
+ */
+export const echoLifeCycleModuleAddress = {
+  31337: '0x88a42e46e04F136D26349bb2dB2b2b8d0f14ce3d',
+} as const
+
+/**
+ *
+ */
+export const echoLifeCycleModuleConfig = {
+  address: echoLifeCycleModuleAddress,
+  abi: echoLifeCycleModuleAbi,
+} as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // EchoLifeModule
@@ -2408,6 +2667,9 @@ export const echoPetActionAbi = [
 // EchoProgressModule
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+/**
+ *
+ */
 export const echoProgressModuleAbi = [
   {
     type: 'constructor',
@@ -2424,7 +2686,7 @@ export const echoProgressModuleAbi = [
   {
     type: 'function',
     inputs: [],
-    name: 'PROGRESS_MANAGER_ROLE',
+    name: 'PROGRESS_CONTROLLER_ROLE',
     outputs: [{ name: '', internalType: 'bytes32', type: 'bytes32' }],
     stateMutability: 'view',
   },
@@ -2441,11 +2703,11 @@ export const echoProgressModuleAbi = [
   {
     type: 'function',
     inputs: [{ name: '_echoId', internalType: 'uint256', type: 'uint256' }],
-    name: 'getProgress',
+    name: 'getEchoProgress',
     outputs: [
       {
         name: '',
-        internalType: 'struct EchoProgressModule.EchoProgress',
+        internalType: 'struct EchoProgressModule.s_EchoProgress',
         type: 'tuple',
         components: [
           { name: 'xp', internalType: 'uint256', type: 'uint256' },
@@ -2629,6 +2891,21 @@ export const echoProgressModuleAbi = [
     name: 'AccessControlUnauthorizedAccount',
   },
 ] as const
+
+/**
+ *
+ */
+export const echoProgressModuleAddress = {
+  31337: '0xE8e33B7326675Ed1f271f0315b796ef2402cd99E',
+} as const
+
+/**
+ *
+ */
+export const echoProgressModuleConfig = {
+  address: echoProgressModuleAddress,
+  abi: echoProgressModuleAbi,
+} as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // IAccessControl
@@ -5034,17 +5311,6 @@ export const useReadEchoFactory = /*#__PURE__*/ createUseReadContract({
 })
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link echoFactoryAbi}__ and `functionName` set to `"echo"`
- *
- *
- */
-export const useReadEchoFactoryEcho = /*#__PURE__*/ createUseReadContract({
-  abi: echoFactoryAbi,
-  address: echoFactoryAddress,
-  functionName: 'echo',
-})
-
-/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link echoFactoryAbi}__ and `functionName` set to `"echoERC721"`
  *
  *
@@ -5056,6 +5322,18 @@ export const useReadEchoFactoryEchoErc721 = /*#__PURE__*/ createUseReadContract(
     functionName: 'echoERC721',
   },
 )
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link echoFactoryAbi}__ and `functionName` set to `"echoGenesis"`
+ *
+ *
+ */
+export const useReadEchoFactoryEchoGenesis =
+  /*#__PURE__*/ createUseReadContract({
+    abi: echoFactoryAbi,
+    address: echoFactoryAddress,
+    functionName: 'echoGenesis',
+  })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link echoFactoryAbi}__ and `functionName` set to `"getEchoContext"`
@@ -5136,226 +5414,563 @@ export const useWatchEchoFactoryEchoCreatedEvent =
   })
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link echoLifeCycleModuleAbi}__
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link echoGenesisAbi}__
+ *
+ *
  */
-export const useReadEchoLifeCycleModule = /*#__PURE__*/ createUseReadContract({
-  abi: echoLifeCycleModuleAbi,
+export const useReadEchoGenesis = /*#__PURE__*/ createUseReadContract({
+  abi: echoGenesisAbi,
+  address: echoGenesisAddress,
 })
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link echoLifeCycleModuleAbi}__ and `functionName` set to `"DEFAULT_ADMIN_ROLE"`
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link echoGenesisAbi}__ and `functionName` set to `"DEFAULT_ADMIN_ROLE"`
+ *
+ *
  */
-export const useReadEchoLifeCycleModuleDefaultAdminRole =
+export const useReadEchoGenesisDefaultAdminRole =
   /*#__PURE__*/ createUseReadContract({
-    abi: echoLifeCycleModuleAbi,
+    abi: echoGenesisAbi,
+    address: echoGenesisAddress,
     functionName: 'DEFAULT_ADMIN_ROLE',
   })
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link echoLifeCycleModuleAbi}__ and `functionName` set to `"LIFECYCLE_MANAGER_ROLE"`
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link echoGenesisAbi}__ and `functionName` set to `"FACTORY_ROLE"`
+ *
+ *
  */
-export const useReadEchoLifeCycleModuleLifecycleManagerRole =
+export const useReadEchoGenesisFactoryRole =
+  /*#__PURE__*/ createUseReadContract({
+    abi: echoGenesisAbi,
+    address: echoGenesisAddress,
+    functionName: 'FACTORY_ROLE',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link echoGenesisAbi}__ and `functionName` set to `"echosGenesis"`
+ *
+ *
+ */
+export const useReadEchoGenesisEchosGenesis =
+  /*#__PURE__*/ createUseReadContract({
+    abi: echoGenesisAbi,
+    address: echoGenesisAddress,
+    functionName: 'echosGenesis',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link echoGenesisAbi}__ and `functionName` set to `"getEchoGenesis"`
+ *
+ *
+ */
+export const useReadEchoGenesisGetEchoGenesis =
+  /*#__PURE__*/ createUseReadContract({
+    abi: echoGenesisAbi,
+    address: echoGenesisAddress,
+    functionName: 'getEchoGenesis',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link echoGenesisAbi}__ and `functionName` set to `"getRoleAdmin"`
+ *
+ *
+ */
+export const useReadEchoGenesisGetRoleAdmin =
+  /*#__PURE__*/ createUseReadContract({
+    abi: echoGenesisAbi,
+    address: echoGenesisAddress,
+    functionName: 'getRoleAdmin',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link echoGenesisAbi}__ and `functionName` set to `"hasRole"`
+ *
+ *
+ */
+export const useReadEchoGenesisHasRole = /*#__PURE__*/ createUseReadContract({
+  abi: echoGenesisAbi,
+  address: echoGenesisAddress,
+  functionName: 'hasRole',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link echoGenesisAbi}__ and `functionName` set to `"supportsInterface"`
+ *
+ *
+ */
+export const useReadEchoGenesisSupportsInterface =
+  /*#__PURE__*/ createUseReadContract({
+    abi: echoGenesisAbi,
+    address: echoGenesisAddress,
+    functionName: 'supportsInterface',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link echoGenesisAbi}__
+ *
+ *
+ */
+export const useWriteEchoGenesis = /*#__PURE__*/ createUseWriteContract({
+  abi: echoGenesisAbi,
+  address: echoGenesisAddress,
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link echoGenesisAbi}__ and `functionName` set to `"grantRole"`
+ *
+ *
+ */
+export const useWriteEchoGenesisGrantRole =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: echoGenesisAbi,
+    address: echoGenesisAddress,
+    functionName: 'grantRole',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link echoGenesisAbi}__ and `functionName` set to `"initialize"`
+ *
+ *
+ */
+export const useWriteEchoGenesisInitialize =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: echoGenesisAbi,
+    address: echoGenesisAddress,
+    functionName: 'initialize',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link echoGenesisAbi}__ and `functionName` set to `"renounceRole"`
+ *
+ *
+ */
+export const useWriteEchoGenesisRenounceRole =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: echoGenesisAbi,
+    address: echoGenesisAddress,
+    functionName: 'renounceRole',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link echoGenesisAbi}__ and `functionName` set to `"revokeRole"`
+ *
+ *
+ */
+export const useWriteEchoGenesisRevokeRole =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: echoGenesisAbi,
+    address: echoGenesisAddress,
+    functionName: 'revokeRole',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link echoGenesisAbi}__
+ *
+ *
+ */
+export const useSimulateEchoGenesis = /*#__PURE__*/ createUseSimulateContract({
+  abi: echoGenesisAbi,
+  address: echoGenesisAddress,
+})
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link echoGenesisAbi}__ and `functionName` set to `"grantRole"`
+ *
+ *
+ */
+export const useSimulateEchoGenesisGrantRole =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: echoGenesisAbi,
+    address: echoGenesisAddress,
+    functionName: 'grantRole',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link echoGenesisAbi}__ and `functionName` set to `"initialize"`
+ *
+ *
+ */
+export const useSimulateEchoGenesisInitialize =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: echoGenesisAbi,
+    address: echoGenesisAddress,
+    functionName: 'initialize',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link echoGenesisAbi}__ and `functionName` set to `"renounceRole"`
+ *
+ *
+ */
+export const useSimulateEchoGenesisRenounceRole =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: echoGenesisAbi,
+    address: echoGenesisAddress,
+    functionName: 'renounceRole',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link echoGenesisAbi}__ and `functionName` set to `"revokeRole"`
+ *
+ *
+ */
+export const useSimulateEchoGenesisRevokeRole =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: echoGenesisAbi,
+    address: echoGenesisAddress,
+    functionName: 'revokeRole',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link echoGenesisAbi}__
+ *
+ *
+ */
+export const useWatchEchoGenesisEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: echoGenesisAbi,
+    address: echoGenesisAddress,
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link echoGenesisAbi}__ and `eventName` set to `"EchoInitialized"`
+ *
+ *
+ */
+export const useWatchEchoGenesisEchoInitializedEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: echoGenesisAbi,
+    address: echoGenesisAddress,
+    eventName: 'EchoInitialized',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link echoGenesisAbi}__ and `eventName` set to `"RoleAdminChanged"`
+ *
+ *
+ */
+export const useWatchEchoGenesisRoleAdminChangedEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: echoGenesisAbi,
+    address: echoGenesisAddress,
+    eventName: 'RoleAdminChanged',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link echoGenesisAbi}__ and `eventName` set to `"RoleGranted"`
+ *
+ *
+ */
+export const useWatchEchoGenesisRoleGrantedEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: echoGenesisAbi,
+    address: echoGenesisAddress,
+    eventName: 'RoleGranted',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link echoGenesisAbi}__ and `eventName` set to `"RoleRevoked"`
+ *
+ *
+ */
+export const useWatchEchoGenesisRoleRevokedEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: echoGenesisAbi,
+    address: echoGenesisAddress,
+    eventName: 'RoleRevoked',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link echoLifeCycleModuleAbi}__
+ *
+ *
+ */
+export const useReadEchoLifeCycleModule = /*#__PURE__*/ createUseReadContract({
+  abi: echoLifeCycleModuleAbi,
+  address: echoLifeCycleModuleAddress,
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link echoLifeCycleModuleAbi}__ and `functionName` set to `"DEFAULT_ADMIN_ROLE"`
+ *
+ *
+ */
+export const useReadEchoLifeCycleModuleDefaultAdminRole =
   /*#__PURE__*/ createUseReadContract({
     abi: echoLifeCycleModuleAbi,
-    functionName: 'LIFECYCLE_MANAGER_ROLE',
+    address: echoLifeCycleModuleAddress,
+    functionName: 'DEFAULT_ADMIN_ROLE',
   })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link echoLifeCycleModuleAbi}__ and `functionName` set to `"MAX_PET_INTERVAL"`
+ *
+ *
  */
 export const useReadEchoLifeCycleModuleMaxPetInterval =
   /*#__PURE__*/ createUseReadContract({
     abi: echoLifeCycleModuleAbi,
+    address: echoLifeCycleModuleAddress,
     functionName: 'MAX_PET_INTERVAL',
   })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link echoLifeCycleModuleAbi}__ and `functionName` set to `"echoFactory"`
+ *
+ *
  */
 export const useReadEchoLifeCycleModuleEchoFactory =
   /*#__PURE__*/ createUseReadContract({
     abi: echoLifeCycleModuleAbi,
+    address: echoLifeCycleModuleAddress,
     functionName: 'echoFactory',
   })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link echoLifeCycleModuleAbi}__ and `functionName` set to `"getEchoLifecycle"`
+ *
+ *
  */
 export const useReadEchoLifeCycleModuleGetEchoLifecycle =
   /*#__PURE__*/ createUseReadContract({
     abi: echoLifeCycleModuleAbi,
+    address: echoLifeCycleModuleAddress,
     functionName: 'getEchoLifecycle',
   })
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link echoLifeCycleModuleAbi}__ and `functionName` set to `"getLastPetAt"`
- */
-export const useReadEchoLifeCycleModuleGetLastPetAt =
-  /*#__PURE__*/ createUseReadContract({
-    abi: echoLifeCycleModuleAbi,
-    functionName: 'getLastPetAt',
-  })
-
-/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link echoLifeCycleModuleAbi}__ and `functionName` set to `"getRoleAdmin"`
+ *
+ *
  */
 export const useReadEchoLifeCycleModuleGetRoleAdmin =
   /*#__PURE__*/ createUseReadContract({
     abi: echoLifeCycleModuleAbi,
+    address: echoLifeCycleModuleAddress,
     functionName: 'getRoleAdmin',
   })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link echoLifeCycleModuleAbi}__ and `functionName` set to `"hasRole"`
+ *
+ *
  */
 export const useReadEchoLifeCycleModuleHasRole =
   /*#__PURE__*/ createUseReadContract({
     abi: echoLifeCycleModuleAbi,
+    address: echoLifeCycleModuleAddress,
     functionName: 'hasRole',
   })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link echoLifeCycleModuleAbi}__ and `functionName` set to `"isAlive"`
+ *
+ *
  */
 export const useReadEchoLifeCycleModuleIsAlive =
   /*#__PURE__*/ createUseReadContract({
     abi: echoLifeCycleModuleAbi,
+    address: echoLifeCycleModuleAddress,
     functionName: 'isAlive',
   })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link echoLifeCycleModuleAbi}__ and `functionName` set to `"supportsInterface"`
+ *
+ *
  */
 export const useReadEchoLifeCycleModuleSupportsInterface =
   /*#__PURE__*/ createUseReadContract({
     abi: echoLifeCycleModuleAbi,
+    address: echoLifeCycleModuleAddress,
     functionName: 'supportsInterface',
   })
 
 /**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link echoLifeCycleModuleAbi}__ and `functionName` set to `"timeBeforeDeath"`
+ *
+ *
+ */
+export const useReadEchoLifeCycleModuleTimeBeforeDeath =
+  /*#__PURE__*/ createUseReadContract({
+    abi: echoLifeCycleModuleAbi,
+    address: echoLifeCycleModuleAddress,
+    functionName: 'timeBeforeDeath',
+  })
+
+/**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link echoLifeCycleModuleAbi}__
+ *
+ *
  */
 export const useWriteEchoLifeCycleModule = /*#__PURE__*/ createUseWriteContract(
-  { abi: echoLifeCycleModuleAbi },
+  { abi: echoLifeCycleModuleAbi, address: echoLifeCycleModuleAddress },
 )
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link echoLifeCycleModuleAbi}__ and `functionName` set to `"grantRole"`
+ *
+ *
  */
 export const useWriteEchoLifeCycleModuleGrantRole =
   /*#__PURE__*/ createUseWriteContract({
     abi: echoLifeCycleModuleAbi,
+    address: echoLifeCycleModuleAddress,
     functionName: 'grantRole',
   })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link echoLifeCycleModuleAbi}__ and `functionName` set to `"pet"`
+ *
+ *
  */
 export const useWriteEchoLifeCycleModulePet =
   /*#__PURE__*/ createUseWriteContract({
     abi: echoLifeCycleModuleAbi,
+    address: echoLifeCycleModuleAddress,
     functionName: 'pet',
   })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link echoLifeCycleModuleAbi}__ and `functionName` set to `"renounceRole"`
+ *
+ *
  */
 export const useWriteEchoLifeCycleModuleRenounceRole =
   /*#__PURE__*/ createUseWriteContract({
     abi: echoLifeCycleModuleAbi,
+    address: echoLifeCycleModuleAddress,
     functionName: 'renounceRole',
   })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link echoLifeCycleModuleAbi}__ and `functionName` set to `"revokeRole"`
+ *
+ *
  */
 export const useWriteEchoLifeCycleModuleRevokeRole =
   /*#__PURE__*/ createUseWriteContract({
     abi: echoLifeCycleModuleAbi,
+    address: echoLifeCycleModuleAddress,
     functionName: 'revokeRole',
   })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link echoLifeCycleModuleAbi}__
+ *
+ *
  */
 export const useSimulateEchoLifeCycleModule =
-  /*#__PURE__*/ createUseSimulateContract({ abi: echoLifeCycleModuleAbi })
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: echoLifeCycleModuleAbi,
+    address: echoLifeCycleModuleAddress,
+  })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link echoLifeCycleModuleAbi}__ and `functionName` set to `"grantRole"`
+ *
+ *
  */
 export const useSimulateEchoLifeCycleModuleGrantRole =
   /*#__PURE__*/ createUseSimulateContract({
     abi: echoLifeCycleModuleAbi,
+    address: echoLifeCycleModuleAddress,
     functionName: 'grantRole',
   })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link echoLifeCycleModuleAbi}__ and `functionName` set to `"pet"`
+ *
+ *
  */
 export const useSimulateEchoLifeCycleModulePet =
   /*#__PURE__*/ createUseSimulateContract({
     abi: echoLifeCycleModuleAbi,
+    address: echoLifeCycleModuleAddress,
     functionName: 'pet',
   })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link echoLifeCycleModuleAbi}__ and `functionName` set to `"renounceRole"`
+ *
+ *
  */
 export const useSimulateEchoLifeCycleModuleRenounceRole =
   /*#__PURE__*/ createUseSimulateContract({
     abi: echoLifeCycleModuleAbi,
+    address: echoLifeCycleModuleAddress,
     functionName: 'renounceRole',
   })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link echoLifeCycleModuleAbi}__ and `functionName` set to `"revokeRole"`
+ *
+ *
  */
 export const useSimulateEchoLifeCycleModuleRevokeRole =
   /*#__PURE__*/ createUseSimulateContract({
     abi: echoLifeCycleModuleAbi,
+    address: echoLifeCycleModuleAddress,
     functionName: 'revokeRole',
   })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link echoLifeCycleModuleAbi}__
+ *
+ *
  */
 export const useWatchEchoLifeCycleModuleEvent =
-  /*#__PURE__*/ createUseWatchContractEvent({ abi: echoLifeCycleModuleAbi })
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: echoLifeCycleModuleAbi,
+    address: echoLifeCycleModuleAddress,
+  })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link echoLifeCycleModuleAbi}__ and `eventName` set to `"EchoPetted"`
+ *
+ *
  */
 export const useWatchEchoLifeCycleModuleEchoPettedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
     abi: echoLifeCycleModuleAbi,
+    address: echoLifeCycleModuleAddress,
     eventName: 'EchoPetted',
   })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link echoLifeCycleModuleAbi}__ and `eventName` set to `"RoleAdminChanged"`
+ *
+ *
  */
 export const useWatchEchoLifeCycleModuleRoleAdminChangedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
     abi: echoLifeCycleModuleAbi,
+    address: echoLifeCycleModuleAddress,
     eventName: 'RoleAdminChanged',
   })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link echoLifeCycleModuleAbi}__ and `eventName` set to `"RoleGranted"`
+ *
+ *
  */
 export const useWatchEchoLifeCycleModuleRoleGrantedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
     abi: echoLifeCycleModuleAbi,
+    address: echoLifeCycleModuleAddress,
     eventName: 'RoleGranted',
   })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link echoLifeCycleModuleAbi}__ and `eventName` set to `"RoleRevoked"`
+ *
+ *
  */
 export const useWatchEchoLifeCycleModuleRoleRevokedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
     abi: echoLifeCycleModuleAbi,
+    address: echoLifeCycleModuleAddress,
     eventName: 'RoleRevoked',
   })
 
@@ -6005,198 +6620,271 @@ export const useWatchEchoPetActionEchoPettedEvent =
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link echoProgressModuleAbi}__
+ *
+ *
  */
 export const useReadEchoProgressModule = /*#__PURE__*/ createUseReadContract({
   abi: echoProgressModuleAbi,
+  address: echoProgressModuleAddress,
 })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link echoProgressModuleAbi}__ and `functionName` set to `"DEFAULT_ADMIN_ROLE"`
+ *
+ *
  */
 export const useReadEchoProgressModuleDefaultAdminRole =
   /*#__PURE__*/ createUseReadContract({
     abi: echoProgressModuleAbi,
+    address: echoProgressModuleAddress,
     functionName: 'DEFAULT_ADMIN_ROLE',
   })
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link echoProgressModuleAbi}__ and `functionName` set to `"PROGRESS_MANAGER_ROLE"`
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link echoProgressModuleAbi}__ and `functionName` set to `"PROGRESS_CONTROLLER_ROLE"`
+ *
+ *
  */
-export const useReadEchoProgressModuleProgressManagerRole =
+export const useReadEchoProgressModuleProgressControllerRole =
   /*#__PURE__*/ createUseReadContract({
     abi: echoProgressModuleAbi,
-    functionName: 'PROGRESS_MANAGER_ROLE',
+    address: echoProgressModuleAddress,
+    functionName: 'PROGRESS_CONTROLLER_ROLE',
   })
 
 /**
- * Wraps __{@link useReadContract}__ with `abi` set to __{@link echoProgressModuleAbi}__ and `functionName` set to `"getProgress"`
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link echoProgressModuleAbi}__ and `functionName` set to `"getEchoProgress"`
+ *
+ *
  */
-export const useReadEchoProgressModuleGetProgress =
+export const useReadEchoProgressModuleGetEchoProgress =
   /*#__PURE__*/ createUseReadContract({
     abi: echoProgressModuleAbi,
-    functionName: 'getProgress',
+    address: echoProgressModuleAddress,
+    functionName: 'getEchoProgress',
   })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link echoProgressModuleAbi}__ and `functionName` set to `"getRoleAdmin"`
+ *
+ *
  */
 export const useReadEchoProgressModuleGetRoleAdmin =
   /*#__PURE__*/ createUseReadContract({
     abi: echoProgressModuleAbi,
+    address: echoProgressModuleAddress,
     functionName: 'getRoleAdmin',
   })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link echoProgressModuleAbi}__ and `functionName` set to `"hasRole"`
+ *
+ *
  */
 export const useReadEchoProgressModuleHasRole =
   /*#__PURE__*/ createUseReadContract({
     abi: echoProgressModuleAbi,
+    address: echoProgressModuleAddress,
     functionName: 'hasRole',
   })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link echoProgressModuleAbi}__ and `functionName` set to `"supportsInterface"`
+ *
+ *
  */
 export const useReadEchoProgressModuleSupportsInterface =
   /*#__PURE__*/ createUseReadContract({
     abi: echoProgressModuleAbi,
+    address: echoProgressModuleAddress,
     functionName: 'supportsInterface',
   })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link echoProgressModuleAbi}__
+ *
+ *
  */
 export const useWriteEchoProgressModule = /*#__PURE__*/ createUseWriteContract({
   abi: echoProgressModuleAbi,
+  address: echoProgressModuleAddress,
 })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link echoProgressModuleAbi}__ and `functionName` set to `"addXp"`
+ *
+ *
  */
 export const useWriteEchoProgressModuleAddXp =
   /*#__PURE__*/ createUseWriteContract({
     abi: echoProgressModuleAbi,
+    address: echoProgressModuleAddress,
     functionName: 'addXp',
   })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link echoProgressModuleAbi}__ and `functionName` set to `"grantRole"`
+ *
+ *
  */
 export const useWriteEchoProgressModuleGrantRole =
   /*#__PURE__*/ createUseWriteContract({
     abi: echoProgressModuleAbi,
+    address: echoProgressModuleAddress,
     functionName: 'grantRole',
   })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link echoProgressModuleAbi}__ and `functionName` set to `"renounceRole"`
+ *
+ *
  */
 export const useWriteEchoProgressModuleRenounceRole =
   /*#__PURE__*/ createUseWriteContract({
     abi: echoProgressModuleAbi,
+    address: echoProgressModuleAddress,
     functionName: 'renounceRole',
   })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link echoProgressModuleAbi}__ and `functionName` set to `"revokeRole"`
+ *
+ *
  */
 export const useWriteEchoProgressModuleRevokeRole =
   /*#__PURE__*/ createUseWriteContract({
     abi: echoProgressModuleAbi,
+    address: echoProgressModuleAddress,
     functionName: 'revokeRole',
   })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link echoProgressModuleAbi}__
+ *
+ *
  */
 export const useSimulateEchoProgressModule =
-  /*#__PURE__*/ createUseSimulateContract({ abi: echoProgressModuleAbi })
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: echoProgressModuleAbi,
+    address: echoProgressModuleAddress,
+  })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link echoProgressModuleAbi}__ and `functionName` set to `"addXp"`
+ *
+ *
  */
 export const useSimulateEchoProgressModuleAddXp =
   /*#__PURE__*/ createUseSimulateContract({
     abi: echoProgressModuleAbi,
+    address: echoProgressModuleAddress,
     functionName: 'addXp',
   })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link echoProgressModuleAbi}__ and `functionName` set to `"grantRole"`
+ *
+ *
  */
 export const useSimulateEchoProgressModuleGrantRole =
   /*#__PURE__*/ createUseSimulateContract({
     abi: echoProgressModuleAbi,
+    address: echoProgressModuleAddress,
     functionName: 'grantRole',
   })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link echoProgressModuleAbi}__ and `functionName` set to `"renounceRole"`
+ *
+ *
  */
 export const useSimulateEchoProgressModuleRenounceRole =
   /*#__PURE__*/ createUseSimulateContract({
     abi: echoProgressModuleAbi,
+    address: echoProgressModuleAddress,
     functionName: 'renounceRole',
   })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link echoProgressModuleAbi}__ and `functionName` set to `"revokeRole"`
+ *
+ *
  */
 export const useSimulateEchoProgressModuleRevokeRole =
   /*#__PURE__*/ createUseSimulateContract({
     abi: echoProgressModuleAbi,
+    address: echoProgressModuleAddress,
     functionName: 'revokeRole',
   })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link echoProgressModuleAbi}__
+ *
+ *
  */
 export const useWatchEchoProgressModuleEvent =
-  /*#__PURE__*/ createUseWatchContractEvent({ abi: echoProgressModuleAbi })
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: echoProgressModuleAbi,
+    address: echoProgressModuleAddress,
+  })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link echoProgressModuleAbi}__ and `eventName` set to `"LevelUp"`
+ *
+ *
  */
 export const useWatchEchoProgressModuleLevelUpEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
     abi: echoProgressModuleAbi,
+    address: echoProgressModuleAddress,
     eventName: 'LevelUp',
   })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link echoProgressModuleAbi}__ and `eventName` set to `"RoleAdminChanged"`
+ *
+ *
  */
 export const useWatchEchoProgressModuleRoleAdminChangedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
     abi: echoProgressModuleAbi,
+    address: echoProgressModuleAddress,
     eventName: 'RoleAdminChanged',
   })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link echoProgressModuleAbi}__ and `eventName` set to `"RoleGranted"`
+ *
+ *
  */
 export const useWatchEchoProgressModuleRoleGrantedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
     abi: echoProgressModuleAbi,
+    address: echoProgressModuleAddress,
     eventName: 'RoleGranted',
   })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link echoProgressModuleAbi}__ and `eventName` set to `"RoleRevoked"`
+ *
+ *
  */
 export const useWatchEchoProgressModuleRoleRevokedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
     abi: echoProgressModuleAbi,
+    address: echoProgressModuleAddress,
     eventName: 'RoleRevoked',
   })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link echoProgressModuleAbi}__ and `eventName` set to `"XpAdded"`
+ *
+ *
  */
 export const useWatchEchoProgressModuleXpAddedEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
     abi: echoProgressModuleAbi,
+    address: echoProgressModuleAddress,
     eventName: 'XpAdded',
   })
 

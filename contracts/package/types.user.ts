@@ -25,13 +25,25 @@ export namespace EchoFactory {
 	export type EchoContext = {
 		echoId: bigint;
 		echoAccount: Address;
-		echo: Echo.s_Echo;
+		echoGenesis: EchoGenesis.s_EchoGenesis;
+	};
+}
+
+export namespace EchoGenesis {
+	export type s_EchoGenesis = {
+		_initialized: boolean;
+		name: string;
+		birthEpoch: bigint;
+	};
+	export type s_Params = {
+		name: string;
 	};
 }
 
 export namespace EchoLifeCycleModule {
 	export type s_EchoLifeCycle = {
-		lastPetAt: bigint;
+		hasBeenPetted: boolean;
+		lastPettedCycle: bigint;
 	};
 }
 
@@ -50,7 +62,7 @@ export namespace EchoLifecycle {
 }
 
 export namespace EchoProgressModule {
-	export type EchoProgress = {
+	export type s_EchoProgress = {
 		xp: bigint;
 		level: bigint;
 	};
