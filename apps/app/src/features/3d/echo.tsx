@@ -14,10 +14,10 @@ type EchoProps = {
 
 const defaultProps = {
 	agitation: 1,
-	chaos: 1,
+	chaos: 0,
 	colors: ["#ccfbf1", "#5eead4", "#0f766e"],
 	reflectivity: 0.35,
-	size: 1,
+	size: 1.5,
 } satisfies Required<EchoProps>;
 
 const Echo = (_props: EchoProps) => {

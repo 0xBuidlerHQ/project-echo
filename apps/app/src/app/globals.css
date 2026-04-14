@@ -1,6 +1,18 @@
 @import "tailwindcss";
 
 :root {
+	--app-w: 1000px !important;
+	--app-px: 1rem !important;
+
+	--header-w: 1000px !important;
+	--header-px: 1rem !important;
+
+	--footer-w: 1000px !important;
+	--footer-px: 1rem !important;
+}
+
+
+:root {
   --background: oklch(0.2 0 0);
   --foreground: #ededed;
   --tronica-letter-spacing: -0.1em;

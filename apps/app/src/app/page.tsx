@@ -1,10 +1,11 @@
 import { Scene } from "@/features/3d/scene";
+import { Container } from "@/primitives/container";
 
 const Homepage = () => {
 	return (
-		<div className="h-full w-full">
+		<Container className="h-full">
 			<Scene />
-		</div>
+		</Container>
 	);
 };
 

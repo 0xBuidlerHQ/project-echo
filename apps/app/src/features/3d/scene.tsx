@@ -1,6 +1,6 @@
 "use client";
 
-import { Center, ContactShadows, OrbitControls } from "@react-three/drei";
+import { Center, ContactShadows, Html, OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import React from "react";
 import { Echo } from "@/features/3d/echo";
@@ -83,6 +83,20 @@ const SceneEnvironments = () => {
 	);
 };
 
+const SceneHUD = () => {
+	return (
+		<Html fullscreen>
+			<div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 flex justify-center p-6">
+				<div className="pointer-events-auto flex items-center gap-4 font-tronica-mono text-[10px] uppercase tracking-[0.24em] text-current">
+					<button className="px-2 py-1 tracking-tighter text-xl" type="button">
+						Hello
+					</button>
+				</div>
+			</div>
+		</Html>
+	);
+};
+
 const Scene = () => {
 	return (
 		<div className="relative h-full w-full">
@@ -90,6 +104,7 @@ const Scene = () => {
 
 			<Canvas shadows camera={{ position: [0, 0, 10] }} className="h-full w-full">
 				<ScenePrimitive />
+				<SceneHUD />
 				<SceneLights />
 				<SceneTools />
 				<SceneEnvironments />

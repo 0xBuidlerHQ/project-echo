@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import { links } from "@/config/links";
+import { HeaderPrimitive } from "@/primitives/header";
 
 const Header = () => {
 	return (
-		<>
+		<HeaderPrimitive>
 			<div className="py-2 px-4">
 				<div className="flex justify-between items-center">
 					<div className="flex gap-4">
@@ -21,7 +22,7 @@ const Header = () => {
 			</div>
 
 			<div className="bg-white/10 h-px" />
-		</>
+		</HeaderPrimitive>
 	);
 };
 

@@ -1,9 +1,10 @@
 import { SiGithub, SiTelegram, SiX } from "@icons-pack/react-simple-icons";
 import { externalLinks } from "@/config/links";
+import { FooterPrimitive } from "@/primitives/footer";
 
 const Footer = () => {
 	return (
-		<>
+		<FooterPrimitive>
 			<div className="bg-white/10 h-px" />
 
 			<div className="py-2 px-4">
@@ -40,7 +41,7 @@ const Footer = () => {
 					</div>
 				</div>
 			</div>
-		</>
+		</FooterPrimitive>
 	);
 };
 
