@@ -5,11 +5,11 @@ import { FooterPrimitive } from "@/primitives/footer";
 const Footer = () => {
 	return (
 		<FooterPrimitive>
-			<div className="bg-white/10 h-px" />
+			<div className="bg-muted h-px" />
 
-			<div className="py-2 px-4">
+			<div className="py-2">
 				<div className="flex justify-between">
-					<div className="opacity-50">/</div>
+					<div className="text-muted-foreground">/</div>
 
 					<div className="flex gap-2">
 						<a

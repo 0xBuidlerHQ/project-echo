@@ -1,9 +1,12 @@
 import "./globals.css";
+import "./system.css";
 
 import type { Metadata } from "next";
-import { geistMono, geistSans, tronicaMono } from "@/config/fonts";
+import { tronicaMono } from "@/config/fonts";
 import { Footer } from "@/layouts/footer";
+import { Globals } from "@/layouts/globals";
 import { Header } from "@/layouts/header";
+import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
 	title: "Echo Project",
@@ -16,10 +19,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html
-			lang="en"
-			className={`${geistSans.variable} ${geistMono.variable} ${tronicaMono.variable} antialiased tracking-tighter`}
-		>
+		<html lang="en" className={cn("antialiased", "tracking-tighter", tronicaMono.variable)}>
 			<body className="grow flex flex-col min-h-dvh font-tronica-mono">
 				<Header />
 
@@ -28,6 +28,9 @@ export default function RootLayout({
 				</main>
 
 				<Footer />
+
+				{/*  */}
+				<Globals />
 			</body>
 		</html>
 	);

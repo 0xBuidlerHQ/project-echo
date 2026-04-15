@@ -1,0 +1,29 @@
+
+@import "tailwindcss";
+@import "./globals.css";
+
+:root {
+	--app-w: 1000px !important;
+	--app-px: 1rem !important;
+
+	--header-w: 1000px !important;
+	--header-px: 1rem !important;
+
+	--footer-w: 1000px !important;
+	--footer-px: 1rem !important;
+}
+
+
+:root {
+  --tronica-letter-spacing: -0.1em;
+}
+
+@theme inline {
+  --font-tronica-mono: var(--font-tronica-mono);
+}
+
+@layer base {
+  .font-tronica-mono {
+    letter-spacing: var(--tronica-letter-spacing);
+  }
+}

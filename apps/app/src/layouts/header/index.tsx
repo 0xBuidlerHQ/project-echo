@@ -7,12 +7,12 @@ import { HeaderPrimitive } from "@/primitives/header";
 const Header = () => {
 	return (
 		<HeaderPrimitive>
-			<div className="py-2 px-4">
+			<div className="py-2">
 				<div className="flex justify-between items-center">
-					<div className="flex gap-4">
-						<div className="opacity-50">0x /</div>
+					<div className="flex items-center gap-4">
+						<div className="text-muted-foreground">0x /</div>
 
-						<Link className="text-sm underline-offset-4 underline" href={links.home.url}>
+						<Link className="text-sm font-medium" href={links.home.url}>
 							Echo Project
 						</Link>
 					</div>
@@ -21,7 +21,7 @@ const Header = () => {
 				</div>
 			</div>
 
-			<div className="bg-white/10 h-px" />
+			<div className="bg-muted h-px" />
 		</HeaderPrimitive>
 	);
 };
