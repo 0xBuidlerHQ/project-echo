@@ -20,6 +20,9 @@ importers:
 
   apps/app:
     dependencies:
+      '@0xhq/relay':
+        specifier: ^0.0.0
+        version: 0.0.0(@types/react@19.2.14)(immer@11.1.3)(react@19.2.5)(use-sync-external-store@1.4.0(react@19.2.5))
       '@base-ui/react':
         specifier: ^1.4.0
         version: 1.4.0(@date-fns/tz@1.4.1)(@types/react@19.2.14)(date-fns@4.1.0)(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
@@ -111,6 +114,9 @@ importers:
         version: 4.21.0
 
 packages:
+
+  '@0xhq/relay@0.0.0':
+    resolution: {integrity: sha512-CDv6xfkUi+r7+9+NVTQ0luTMj+zJpMZJsoyKyYGmyO198d8lRYfwHOmT13/ur0ccSTjMbIX8UW4UuWdnQyekiw==}
 
   '@adraffy/ens-normalize@1.11.1':
     resolution: {integrity: sha512-nhCBV3quEgesuf7c7KYfperqSS14T8bYuvJ8PcLJp6znkZpFc0AuW4qBtr8eKVyPPe/8RSr7sglCWPU5eaxwKQ==}
@@ -3769,6 +3775,15 @@ packages:
         optional: true
 
 snapshots:
+
+  '@0xhq/relay@0.0.0(@types/react@19.2.14)(immer@11.1.3)(react@19.2.5)(use-sync-external-store@1.4.0(react@19.2.5))':
+    dependencies:
+      zustand: 5.0.12(@types/react@19.2.14)(immer@11.1.3)(react@19.2.5)(use-sync-external-store@1.4.0(react@19.2.5))
+    transitivePeerDependencies:
+      - '@types/react'
+      - immer
+      - react
+      - use-sync-external-store
 
   '@adraffy/ens-normalize@1.11.1': {}
 

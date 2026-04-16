@@ -1,26 +1,18 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
-type UseDrawerStoreState = {
-	menuDrawer: boolean;
-	openMenuDrawer: () => void;
-	closeMenuDrawer: () => void;
-
-	petActionDrawer: boolean;
+type UsePetStoreState = {
+	petActionDialog: boolean;
 	openPetActionDialog: () => void;
 	closePetActionDialog: () => void;
 };
 
-const useDrawerStore = create<UseDrawerStoreState>()(
+const usePetStore = create<UsePetStoreState>()(
 	persist(
 		(set) => ({
-			menuDrawer: false,
-			openMenuDrawer: () => set({ menuDrawer: true }),
-			closeMenuDrawer: () => set({ menuDrawer: false }),
-
-			petActionDrawer: false,
-			openPetActionDialog: () => set({ petActionDrawer: true }),
-			closePetActionDialog: () => set({ petActionDrawer: false }),
+			petActionDialog: false,
+			openPetActionDialog: () => set({ petActionDialog: true }),
+			closePetActionDialog: () => set({ petActionDialog: false }),
 		}),
 		{
 			name: "[project-echo]-store",
@@ -33,4 +25,4 @@ const useDrawerStore = create<UseDrawerStoreState>()(
 	),
 );
 
-export { useDrawerStore };
+export { usePetStore };
