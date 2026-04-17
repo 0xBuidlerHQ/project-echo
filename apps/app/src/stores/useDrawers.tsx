@@ -1,5 +1,4 @@
 import { create } from "zustand";
-import { createJSONStorage, persist } from "zustand/middleware";
 
 type UseDrawerStoreState = {
 	menuDrawer: boolean;
@@ -11,26 +10,14 @@ type UseDrawerStoreState = {
 	closePetActionDialog: () => void;
 };
 
-const useDrawerStore = create<UseDrawerStoreState>()(
-	persist(
-		(set) => ({
-			menuDrawer: false,
-			openMenuDrawer: () => set({ menuDrawer: true }),
-			closeMenuDrawer: () => set({ menuDrawer: false }),
+const useDrawerStore = create<UseDrawerStoreState>()((set) => ({
+	menuDrawer: false,
+	openMenuDrawer: () => set({ menuDrawer: true }),
+	closeMenuDrawer: () => set({ menuDrawer: false }),
 
-			petActionDrawer: false,
-			openPetActionDialog: () => set({ petActionDrawer: true }),
-			closePetActionDialog: () => set({ petActionDrawer: false }),
-		}),
-		{
-			name: "[project-echo]-store",
-			storage: createJSONStorage(() => localStorage, {
-				replacer: (_key, value) => (typeof value === "bigint" ? `${value.toString()}n` : value),
-				reviver: (_key, value) =>
-					typeof value === "string" && /^\d+n$/.test(value) ? BigInt(value.slice(0, -1)) : value,
-			}),
-		},
-	),
-);
+	petActionDrawer: false,
+	openPetActionDialog: () => set({ petActionDrawer: true }),
+	closePetActionDialog: () => set({ petActionDrawer: false }),
+}));
 
 export { useDrawerStore };

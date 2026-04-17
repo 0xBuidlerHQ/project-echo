@@ -3,6 +3,7 @@ import { createRelay } from "@0xhq/relay";
 type Config = {};
 type StepBase = {
 	label: string;
+	type: "transaction";
 };
 type StepTransactionSuccess = {
 	type: "transaction";

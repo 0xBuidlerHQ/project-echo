@@ -19,7 +19,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en" className={cn("antialiased", "tracking-tighter", tronicaMono.variable)}>
+		<html lang="en" className={cn("antialiased", tronicaMono.variable)}>
 			<body className="grow flex flex-col min-h-dvh font-tronica-mono">
 				<Header />
 

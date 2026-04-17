@@ -37,6 +37,20 @@ const HUDInfo = () => {
 						<h4 className="text-xs">True</h4>
 						<h4 className="text-xs text-muted-foreground">{" }"}</h4>
 					</Box>
+
+					<Box className="flex gap-1 items-center">
+						<h4 className="text-xs text-muted-foreground">Pet Today:</h4>
+						<h4 className="text-xs text-muted-foreground">{"{ "}</h4>
+						<h4 className="text-xs">False</h4>
+						<h4 className="text-xs text-muted-foreground">{" }"}</h4>
+					</Box>
+
+					<Box className="flex gap-1 items-center">
+						<h4 className="text-xs text-muted-foreground">Time Remaining:</h4>
+						<h4 className="text-xs text-muted-foreground">{"{ "}</h4>
+						<h4 className="text-xs">48399s</h4>
+						<h4 className="text-xs text-muted-foreground">{" }"}</h4>
+					</Box>
 				</div>
 			</HUDInfoItem>
 		</div>

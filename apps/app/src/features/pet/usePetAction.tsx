@@ -8,15 +8,8 @@ const usePetAction = () => {
 	const steps = [
 		petRelayPrimitive.createRelayStep({
 			id: "id-0",
-			label: "API call",
-			fn: async () => {
-				await new Promise((resolve) => setTimeout(resolve, 1000));
-				return petRelayPrimitive.StepSuccess({ type: "apicall" });
-			},
-		}),
-		petRelayPrimitive.createRelayStep({
-			id: "id-1",
-			label: "API2 call",
+			label: "Petting { Echo }",
+			type: "transaction",
 			fn: async () => {
 				await new Promise((resolve) => setTimeout(resolve, 1000));
 				return petRelayPrimitive.StepSuccess({ type: "apicall" });
