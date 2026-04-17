@@ -5,17 +5,17 @@ import { petRelay } from "@/features/pet/relay";
 import { usePetAction } from "@/features/pet/usePetAction";
 import { Box } from "@/primitives/box";
 import { Button } from "@/primitives/button";
-import { Dialog, DialogContent, DialogTitle } from "@/shadcn/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/shadcn/dialog";
 
 const PetActionContent = () => {
 	const { stepsBase, stepsState } = petRelay.useRelay();
-	const { execute } = usePetAction();
+	const { start } = usePetAction();
 
 	return (
-		<Box className="px-4 flex flex-col gap-8">
+		<Box className="flex flex-col gap-8">
 			<h1 className="text-8xl font-bold">Pet</h1>
 
-			<Button onClick={execute}>confirm</Button>
+			<Button onClick={start}>confirm</Button>
 
 			<Box>
 				{stepsBase.map((item, i) => {
@@ -41,9 +41,10 @@ const PetActionDialog = () => {
 
 	return (
 		<Dialog open={petStore.petActionDialog} onOpenChange={petStore.closePetActionDialog}>
-			<DialogContent className="bg-white text-black">
+			<DialogContent className="bg-white text-black p-0" showCloseButton={false}>
 				<Box>
-					<DialogTitle className="hidden">Action Dialog</DialogTitle>
+					<DialogTitle className="hidden">Pet Action Dialog Title</DialogTitle>
+					<DialogDescription className="hidden">Pet Action Dialog Description</DialogDescription>
 
 					<PetActionContent />
 				</Box>

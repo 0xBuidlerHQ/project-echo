@@ -14,7 +14,7 @@ const SceneOverlay = () => {
 	return (
 		<div
 			className={cn(
-				"absolute inset-0 z-100 bg-background transition-opacity duration-500",
+				"absolute inset-0 z-10 bg-background transition-opacity duration-500",
 				show ? "opacity-100" : "pointer-events-none opacity-0",
 			)}
 		/>

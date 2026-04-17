@@ -24,12 +24,13 @@ const usePetAction = () => {
 		}),
 	];
 
-	const execute = () => {
-		petRelay.initialize(steps);
-		petRelay.start();
+	return {
+		initialize: () => {
+			petRelay.reset();
+			petRelay.initialize(steps);
+		},
+		start: petRelay.start,
 	};
-
-	return { execute };
 };
 
 export { usePetAction };

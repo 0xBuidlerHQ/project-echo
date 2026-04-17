@@ -6,7 +6,7 @@ import { tronicaMono } from "@/config/fonts";
 import { Footer } from "@/layouts/footer";
 import { Globals } from "@/layouts/globals";
 import { Header } from "@/layouts/header";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils";
 
 export const metadata: Metadata = {
 	title: "Echo Project",
