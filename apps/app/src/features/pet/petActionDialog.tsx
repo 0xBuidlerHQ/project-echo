@@ -98,7 +98,7 @@ const PetActionContent = () => {
 			<Box className="flex flex-col gap-0">
 				<h1 className="text-6xl font-bold">Pet</h1>
 				<h1 className="text-sm text-muted-foreground">
-					{"{ "}Feeding your Echo{" }"}
+					{"{ "}Petting your Echo{" }"}
 				</h1>
 			</Box>
 
@@ -145,13 +145,7 @@ const PetActionContent = () => {
 															Step {i + 1}
 														</Box>
 
-														<motion.div
-															layout
-															className="truncate"
-															animate={status === "loading" ? { x: [0, 2, 0] } : { x: 0 }}
-														>
-															{stepBase.label}
-														</motion.div>
+														<Box className="truncate">{stepBase.label}</Box>
 													</Box>
 
 													<Box className="relative flex size-6 shrink-0 items-center justify-center">
@@ -175,17 +169,7 @@ const PetActionContent = () => {
 										className="absolute inset-y-0 left-0 rounded-full bg-foreground"
 										animate={{ width: `${progressValue}%` }}
 										transition={{ duration: 1, ease: "easeInOut" }}
-									>
-										<motion.div
-											className="absolute inset-y-0 right-0 w-10 rounded-full bg-white/30 blur-[6px]"
-											animate={isRunning ? { x: [-20, 12, -20] } : { x: 0 }}
-											transition={
-												isRunning
-													? { duration: 1.2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }
-													: { duration: 0.2 }
-											}
-										/>
-									</motion.div>
+									/>
 								</Box>
 							</Box>
 						</Box>

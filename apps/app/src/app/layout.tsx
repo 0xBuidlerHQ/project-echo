@@ -11,6 +11,9 @@ import { cn } from "@/utils";
 export const metadata: Metadata = {
 	title: "Echo Project",
 	description: "",
+	other: {
+		"base:app_id": "69e4c46487970a2e83bef380",
+	},
 };
 
 export default function RootLayout({

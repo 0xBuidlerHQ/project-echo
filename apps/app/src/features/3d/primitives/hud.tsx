@@ -30,7 +30,7 @@ const HUDInfo = () => {
 			</HUDInfoItem>
 
 			<HUDInfoItem label="info">
-				<div className="flex flex-col bg-muted p-1 rounded">
+				<div className="flex flex-col bg-muted p-2 rounded">
 					<Box className="flex gap-1 items-center">
 						<h4 className="text-xs text-muted-foreground">Alive:</h4>
 						<h4 className="text-xs text-muted-foreground">{"{ "}</h4>
