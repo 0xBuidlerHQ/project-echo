@@ -1,7 +1,7 @@
-"use client";
-
 import Link from "next/link";
 import { links } from "@/config/links";
+import { ConnectButton } from "@/features/web3/connectButton";
+import { Box } from "@/primitives/box";
 import { HeaderPrimitive } from "@/primitives/header";
 
 const Header = () => {
@@ -17,7 +17,9 @@ const Header = () => {
 						</Link>
 					</div>
 
-					<div className="underline underline-offset-4 text-sm">connect</div>
+					<Box>
+						<ConnectButton />
+					</Box>
 				</div>
 			</div>
 

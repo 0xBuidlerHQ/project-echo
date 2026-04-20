@@ -2,38 +2,43 @@ import "./globals.css";
 import "./system.css";
 
 import type { Metadata } from "next";
+import { headers } from "next/headers";
+import { cookieToInitialState } from "wagmi";
 import { tronicaMono } from "@/config/fonts";
 import { Footer } from "@/layouts/footer";
 import { Globals } from "@/layouts/globals";
 import { Header } from "@/layouts/header";
+import { Providers } from "@/providers";
+import { wagmiConfig } from "@/providers/wagmi.config";
 import { cn } from "@/utils";
 
 export const metadata: Metadata = {
 	title: "Echo Project",
 	description: "",
-	other: {
-		"base:app_id": "69e4c46487970a2e83bef380",
-	},
 };
 
-export default function RootLayout({
+export default async function RootLayout({
 	children,
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
+	const initialState = cookieToInitialState(wagmiConfig(), (await headers()).get("cookie"));
+
 	return (
 		<html lang="en" className={cn("antialiased", tronicaMono.variable)}>
 			<body className="grow flex flex-col min-h-dvh font-tronica-mono">
-				<Header />
+				<Providers initialState={initialState}>
+					<Header />
 
-				<main className="flex grow min-h-0">
-					<div className="grow relative">{children}</div>
-				</main>
+					<main className="flex grow min-h-0">
+						<div className="grow relative">{children}</div>
+					</main>
 
-				<Footer />
+					<Footer />
 
-				{/*  */}
-				<Globals />
+					{/*  */}
+					<Globals />
+				</Providers>
 			</body>
 		</html>
 	);
