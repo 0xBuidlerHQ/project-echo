@@ -1,10 +1,15 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Inter } from "next/font/google";
 import localFont from "next/font/local";
 
 const tronicaMono = localFont({
 	src: "../../public/tronicaMono.woff2",
 	variable: "--font-tronica-mono",
 	display: "swap",
+});
+
+const interSans = Inter({
+	variable: "--font-inter-sans",
+	subsets: ["latin"],
 });
 
 const geistSans = Geist({
@@ -17,4 +22,4 @@ const geistMono = Geist_Mono({
 	subsets: ["latin"],
 });
 
-export { geistMono, geistSans, tronicaMono };
+export { geistMono, geistSans, interSans, tronicaMono };

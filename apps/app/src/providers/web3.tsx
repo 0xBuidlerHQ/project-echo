@@ -179,4 +179,4 @@ const useWeb3 = () => {
 	return context;
 };
 
-export { useWeb3, Web3Provider };
+export { useWeb3, Web3Context, Web3Provider };

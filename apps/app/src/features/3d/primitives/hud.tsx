@@ -1,10 +1,11 @@
 "use client";
 
-import { Html } from "@react-three/drei";
+import { Html, useContextBridge } from "@react-three/drei";
 import { PlusIcon } from "lucide-react";
 import type { PropsWithChildren } from "react";
 import { Box } from "@/primitives/box";
 import { Button } from "@/primitives/button";
+import { useWeb3, Web3Context } from "@/providers/web3";
 import { useDrawerStore } from "@/stores/useDrawers";
 
 const HUDInfoItem = (props: { label: string } & PropsWithChildren) => (
@@ -58,11 +59,13 @@ const HUDInfo = () => {
 };
 
 const HUDButtons = () => {
+	const { isDisconnected } = useWeb3();
 	const drawerStore = useDrawerStore();
 
 	return (
 		<div className="pointer-events-auto flex justify-center">
 			<Button
+				disabled={isDisconnected}
 				className="rounded-full transition-all hover:rotate-12 hover:scale-90 duration-500"
 				onClick={drawerStore.openMenuDrawer}
 			>
@@ -73,15 +76,19 @@ const HUDButtons = () => {
 };
 
 const SceneHUD = () => {
+	const Web3ContextBridge = useContextBridge(Web3Context);
+
 	return (
 		<Html fullscreen prepend className="z-0" zIndexRange={[0, 0]}>
-			<div className="pointer-events-none absolute top-0 left-0 z-20 py-4">
-				<HUDInfo />
-			</div>
+			<Web3ContextBridge>
+				<div className="pointer-events-none absolute top-0 left-0 z-20 py-4">
+					<HUDInfo />
+				</div>
 
-			<div className="pointer-events-none absolute bottom-0 right-0 z-20 py-4">
-				<HUDButtons />
-			</div>
+				<div className="pointer-events-none absolute bottom-0 right-0 z-20 py-4">
+					<HUDButtons />
+				</div>
+			</Web3ContextBridge>
 		</Html>
 	);
 };
