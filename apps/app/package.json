@@ -9,8 +9,10 @@
 		"lint": "eslint"
 	},
 	"dependencies": {
+		"@0xhq/project-echo.contracts": "workspace:*",
 		"@0xhq/beaut": "^0.0.1",
 		"@0xhq/relay": "^0.0.0",
+		"@account-kit/react": "^4.87.2",
 		"@base-ui/react": "^1.4.0",
 		"@icons-pack/react-simple-icons": "^13.13.0",
 		"@react-three/drei": "^10.7.7",

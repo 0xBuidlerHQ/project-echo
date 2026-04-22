@@ -2,7 +2,7 @@
 
 import { petRelay as petRelayPrimitive } from "@/features/pet/relay";
 
-const usePetAction = () => {
+const usePet = () => {
 	const petRelay = petRelayPrimitive.useRelay();
 
 	const steps = [
@@ -26,4 +26,4 @@ const usePetAction = () => {
 	};
 };
 
-export { usePetAction };
+export { usePet };

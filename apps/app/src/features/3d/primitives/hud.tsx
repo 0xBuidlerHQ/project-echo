@@ -1,12 +1,13 @@
 "use client";
 
 import { Html, useContextBridge } from "@react-three/drei";
-import { PlusIcon } from "lucide-react";
+import { MenuIcon, PlusIcon } from "lucide-react";
 import type { PropsWithChildren } from "react";
+import { useDrawerStore } from "@/features/drawers/store";
 import { Box } from "@/primitives/box";
 import { Button } from "@/primitives/button";
 import { useWeb3, Web3Context } from "@/providers/web3";
-import { useDrawerStore } from "@/stores/useDrawers";
+import { cn } from "@/utils";
 
 const HUDInfoItem = (props: { label: string } & PropsWithChildren) => (
 	<div className="flex flex-col gap-px">
@@ -17,8 +18,15 @@ const HUDInfoItem = (props: { label: string } & PropsWithChildren) => (
 );
 
 const HUDInfo = () => {
+	const { isConnected } = useWeb3();
+
 	return (
-		<div className="pointer-events-auto gap-4 text-[10px]">
+		<div
+			className={cn(
+				"pointer-events-auto gap-4 text-[10px] transition-all opacity-0",
+				isConnected && "opacity-100",
+			)}
+		>
 			<HUDInfoItem label="name">
 				<h1 className="font-semibold text-7xl">Marcus</h1>
 			</HUDInfoItem>
@@ -59,17 +67,31 @@ const HUDInfo = () => {
 };
 
 const HUDButtons = () => {
-	const { isDisconnected } = useWeb3();
+	const { isConnected } = useWeb3();
 	const drawerStore = useDrawerStore();
 
 	return (
-		<div className="pointer-events-auto flex justify-center">
+		<div className="pointer-events-auto flex justify-between w-full">
 			<Button
-				disabled={isDisconnected}
-				className="rounded-full transition-all hover:rotate-12 hover:scale-90 duration-500"
-				onClick={drawerStore.openMenuDrawer}
+				disabled={!isConnected}
+				className={cn(
+					"rounded-full transition-all -rotate-1 hover:-rotate-12 hover:scale-90 duration-500 opacity-0",
+					isConnected && "opacity-100",
+				)}
+				onClick={drawerStore.openSelectDrawer}
 			>
-				<PlusIcon className="size-25" />
+				<MenuIcon className="size-21" />
+			</Button>
+
+			<Button
+				disabled={!isConnected}
+				className={cn(
+					"rounded-full transition-all rotate-1 hover:rotate-12 hover:scale-90 duration-500 opacity-0",
+					isConnected && "opacity-100",
+				)}
+				onClick={drawerStore.openActionDrawer}
+			>
+				<PlusIcon className="size-21" />
 			</Button>
 		</div>
 	);
@@ -85,7 +107,7 @@ const SceneHUD = () => {
 					<HUDInfo />
 				</div>
 
-				<div className="pointer-events-none absolute bottom-0 right-0 z-20 py-4">
+				<div className="pointer-events-none absolute bottom-0 z-20 py-4 w-full">
 					<HUDButtons />
 				</div>
 			</Web3ContextBridge>

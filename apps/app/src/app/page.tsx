@@ -1,3 +1,5 @@
+"use client";
+
 import { Scene } from "@/features/3d/scene";
 import { Container } from "@/primitives/container";
 

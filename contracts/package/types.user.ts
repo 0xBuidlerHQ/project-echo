@@ -2,17 +2,6 @@
 export type Address = string;
 export type Bytes = string;
 
-export namespace Echo {
-	export type s_Echo = {
-		_initialized: boolean;
-		name: string;
-		birthEpoch: bigint;
-	};
-	export type s_Params = {
-		name: string;
-	};
-}
-
 export namespace EchoAccount {
 	export type Call = {
 		target: Address;
@@ -44,20 +33,6 @@ export namespace EchoLifeCycleModule {
 	export type s_EchoLifeCycle = {
 		hasBeenPetted: boolean;
 		lastPettedCycle: bigint;
-	};
-}
-
-export namespace EchoLifeModule {
-	export type EchoLife = {
-		alive: boolean;
-		lastPetAt: bigint;
-	};
-}
-
-export namespace EchoLifecycle {
-	export type EchoLifecycleState = {
-		alive: boolean;
-		lastPetAt: bigint;
 	};
 }
 

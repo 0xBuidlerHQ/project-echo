@@ -2,9 +2,9 @@
 
 import { CheckCircle2, Circle, LoaderCircle, X, XCircle } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
-import { usePetStore } from "@/features/pet/petStore";
 import { petRelay } from "@/features/pet/relay";
-import { usePetAction } from "@/features/pet/usePetAction";
+import { usePetStore } from "@/features/pet/store";
+import { usePet } from "@/features/pet/usePet";
 import { Box } from "@/primitives/box";
 import { Button } from "@/primitives/button";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/shadcn/dialog";
@@ -73,9 +73,9 @@ const StepListEmpty = () => (
 	</motion.div>
 );
 
-const PetActionContent = () => {
+const Content = () => {
 	const { stepsBase, stepsState, isRunning, isDone, isError } = petRelay.useRelay();
-	const { start, initialize } = usePetAction();
+	const { start, initialize } = usePet();
 	const petStore = usePetStore();
 	const totalSteps = stepsBase.length;
 	const completedSteps = stepsState.filter((step) => step?.status === "success").length;
@@ -208,7 +208,7 @@ const PetActionContent = () => {
 	);
 };
 
-const PetActionDialog = () => {
+const PetDialog = () => {
 	const petStore = usePetStore();
 
 	return (
@@ -220,10 +220,10 @@ const PetActionDialog = () => {
 				<DialogTitle className="hidden">Pet Action Dialog Title</DialogTitle>
 				<DialogDescription className="hidden">Pet Action Dialog Description</DialogDescription>
 
-				<PetActionContent />
+				<Content />
 			</DialogContent>
 		</Dialog>
 	);
 };
 
-export { PetActionDialog };
+export { PetDialog };

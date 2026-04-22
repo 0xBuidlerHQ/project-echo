@@ -1,16 +1,16 @@
 "use client";
 
 import { type LucideIcon, MoveRight, Send } from "lucide-react";
-import { usePetStore } from "@/features/pet/petStore";
-import { usePetAction } from "@/features/pet/usePetAction";
+import { useDrawerStore } from "@/features/drawers/store";
+import { usePetStore } from "@/features/pet/store";
+import { usePet } from "@/features/pet/usePet";
 import { Footer } from "@/layouts/footer";
 import { Box } from "@/primitives/box";
 import { Button } from "@/primitives/button";
 import { Container } from "@/primitives/container";
 import { Drawer, DrawerContent, DrawerTitle } from "@/shadcn/drawer";
-import { useDrawerStore } from "@/stores/useDrawers";
 
-const MenuActionItem = (props: { text: string; onClick: Function }) => {
+const ActionItem = (props: { text: string; onClick: Function }) => {
 	return (
 		<Button onClick={() => props.onClick()}>
 			<Box className="flex items-center transition-all duration-300 gap-2 text-red-500 hover:text-white hover:bg-red-500 border border-transparent hover:border-muted">
@@ -38,23 +38,23 @@ const MenuUtilItem = (props: { text: string; icon: LucideIcon }) => {
 	);
 };
 
-const MenuContent = () => {
+const ActionContent = () => {
 	const drawerStore = useDrawerStore();
 
 	const petStore = usePetStore();
-	const petAction = usePetAction();
+	const petAction = usePet();
 
 	return (
-		<Box className="px-4 flex flex-col gap-8">
+		<Box className="px-4 flex flex-col gap-8 mb-8">
 			<h1 className="text-8xl font-bold">menu</h1>
 
 			<Box className="h-px bg-muted" />
 
 			<Box className="flex flex-col gap-2">
-				<MenuActionItem
+				<ActionItem
 					text="pet"
 					onClick={() => {
-						drawerStore.closeMenuDrawer();
+						drawerStore.closeActionDrawer();
 						petStore.openPetActionDialog();
 						petAction.initialize();
 					}}
@@ -66,13 +66,11 @@ const MenuContent = () => {
 			<Box className="flex justify-center gap-4">
 				<MenuUtilItem text="share" icon={Send} />
 			</Box>
-
-			<Box />
 		</Box>
 	);
 };
 
-const MenuFooter = () => {
+const ActionFooter = () => {
 	return (
 		<>
 			<Box className="h-px" />
@@ -82,22 +80,21 @@ const MenuFooter = () => {
 	);
 };
 
-const MenuDrawer = () => {
+const ActionDrawer = () => {
 	const drawerStore = useDrawerStore();
 
 	return (
-		<Drawer open={drawerStore.menuDrawer} onOpenChange={drawerStore.closeMenuDrawer}>
+		<Drawer open={drawerStore.actionDrawer} onOpenChange={drawerStore.closeActionDrawer}>
 			<DrawerContent className="bg-white text-black">
 				<Container>
-					<DrawerTitle className="hidden">Menu Drawer</DrawerTitle>
+					<DrawerTitle className="hidden">Action Drawer</DrawerTitle>
 
-					<MenuContent />
-
-					<MenuFooter />
+					<ActionContent />
+					<ActionFooter />
 				</Container>
 			</DrawerContent>
 		</Drawer>
 	);
 };
 
-export { MenuDrawer };
+export { ActionDrawer };

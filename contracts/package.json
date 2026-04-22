@@ -8,7 +8,7 @@
 		".": "./package/index.tsx",
 		"./types.user": "./package/types.user.ts",
 		"./types.libs": "./package/types.libs.ts",
-		"./config.json": "./deployment-config.json"
+		"./deployments.json": "./deployments/deployments.json"
 	},
 	"scripts": {
 		"dev": "(sleep 5 && make deploy && pnpm build-all) & make dev",
@@ -17,7 +17,7 @@
 		"build-wagmi": "pnpm wagmi generate",
 		"build-types": "pnpm tsx ts/script.ts"
 	},
-	"dependencies": {
+	"peerDependencies": {
 		"wagmi": "^3.6.1"
 	},
 	"devDependencies": {

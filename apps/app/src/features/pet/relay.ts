@@ -1,19 +1,24 @@
 import { createRelay } from "@0xhq/relay";
 
 type Config = {};
+
 type StepBase = {
 	label: string;
 	type: "transaction";
 };
+
 type StepTransactionSuccess = {
 	type: "transaction";
 	txHash: string;
 	blockNumber: number;
 };
+
 type StepApiCallSuccess = {
 	type: "apicall";
 };
+
 type StepSuccess = StepTransactionSuccess | StepApiCallSuccess;
+
 type StepError = {
 	message: string;
 };

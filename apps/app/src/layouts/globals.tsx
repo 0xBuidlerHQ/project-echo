@@ -1,12 +1,15 @@
-import { MenuDrawer } from "@/features/drawers/menuDrawer";
-import { PetActionDialog } from "@/features/pet/petActionDialog";
+import { ActionDrawer } from "@/features/drawers/actionDrawer";
+import { SelectDrawer } from "@/features/drawers/selectDrawer";
+
+import { PetDialog } from "@/features/pet/dialog";
 
 const Globals = () => {
 	return (
 		<div className="z-1000">
-			<MenuDrawer />
+			<ActionDrawer />
+			<SelectDrawer />
 
-			<PetActionDialog />
+			<PetDialog />
 		</div>
 	);
 };
