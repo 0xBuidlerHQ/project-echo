@@ -42,7 +42,7 @@ const Content = () => {
 			<Box className="flex flex-col gap-2 border rounded-2xl p-4">
 				{ContentItems.map((item, _) => {
 					return (
-						<>
+						<Box key={item.title}>
 							<Box key={item.title} className="flex justify-between">
 								<Box className="flex flex-col">
 									<Box className="font-medium">{item.title}</Box>
@@ -53,7 +53,7 @@ const Content = () => {
 							</Box>
 
 							{ContentItems.length - 1 !== _ && <Box className="h-px bg-muted" />}
-						</>
+						</Box>
 					);
 				})}
 			</Box>

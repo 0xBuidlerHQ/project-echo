@@ -3,7 +3,7 @@
 import { PlusIcon } from "lucide-react";
 import { useDrawerStore } from "@/features/drawers/store";
 import { useEchoStore } from "@/features/echo/store";
-import { useEcho } from "@/features/web3/useEcho";
+import { useEcho } from "@/features/echo/useEcho";
 import { Footer } from "@/layouts/footer";
 import { Box } from "@/primitives/box";
 import { Button } from "@/primitives/button";
@@ -12,7 +12,9 @@ import { Drawer, DrawerContent, DrawerTitle } from "@/shadcn/drawer";
 
 const SelectContent = () => {
 	const echo = useEcho();
+
 	const settingsStore = useEchoStore();
+	const drawerStore = useDrawerStore();
 
 	return (
 		<Box className="px-4 flex flex-col gap-8 mb-8">
@@ -21,7 +23,13 @@ const SelectContent = () => {
 			<Box className="h-px bg-muted" />
 
 			<Box className="grid grid-cols-5 gap-2">
-				<Button onClick={settingsStore.openEchoCreationDialog} className="rounded border h-full">
+				<Button
+					onClick={() => {
+						drawerStore.closeSelectDrawer();
+						settingsStore.openEchoCreationDialog();
+					}}
+					className="rounded border h-full"
+				>
 					<Box className="h-full flex items-center justify-center">
 						<PlusIcon className="size-21" />
 					</Box>

@@ -13,19 +13,16 @@ type CreateEchoParams = EchoGenesis.s_Params;
 const useEchoCreate = () => {
 	const queryClient = useQueryClient();
 	const { chain, eoa } = useWeb3();
-	const owner = eoa.address as Address | undefined;
-	const chainId = chain?.id as keyof typeof echoFactoryConfig.address | undefined;
 	const echoFactoryMint = useWriteContract();
 
+	const owner = eoa.address as Address | undefined;
+	const chainId = chain?.id as keyof typeof echoFactoryConfig.address | undefined;
+
 	const createEcho = async (params: CreateEchoParams) => {
-		if (!chainId) {
-			throw new Error("Missing chain id");
-		}
+		if (!chainId) throw new Error("Missing chain id");
 
 		const address = echoFactoryConfig.address[chainId];
-		if (!address) {
-			throw new Error(`EchoFactory is not configured for chain ${chainId}`);
-		}
+		if (!address) throw new Error(`EchoFactory is not configured for chain ${chainId}`);
 
 		const hash = await echoFactoryMint.mutateAsync({
 			...echoFactoryConfig,
@@ -34,9 +31,7 @@ const useEchoCreate = () => {
 			args: [params],
 		});
 
-		await queryClient.invalidateQueries({
-			queryKey: ["echo", "owned", chainId, owner],
-		});
+		await queryClient.invalidateQueries({ queryKey: ["echo", "owned", chainId, owner] });
 
 		return hash;
 	};

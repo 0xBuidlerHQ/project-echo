@@ -16,16 +16,12 @@ const useEcho = () => {
 		queryKey: ["echo", "owned", chainId, owner],
 		enabled: Boolean(publicClient && owner && chainId),
 		queryFn: async (): Promise<EchoFactory.EchoContext[]> => {
-			if (!publicClient || !owner || !chainId) {
-				return [];
-			}
+			if (!publicClient || !owner || !chainId) return [];
 
 			const echoErc721Address = echoErc721Config.address[chainId];
 			const echoFactoryAddress = echoFactoryConfig.address[chainId];
 
-			if (!echoErc721Address || !echoFactoryAddress) {
-				return [];
-			}
+			if (!echoErc721Address || !echoFactoryAddress) return [];
 
 			const balance = await publicClient.readContract({
 				...echoErc721Config,
@@ -34,9 +30,7 @@ const useEcho = () => {
 				args: [owner],
 			});
 
-			if (balance === BigInt(0)) {
-				return [];
-			}
+			if (balance === BigInt(0)) return [];
 
 			const tokenIds = (await publicClient.multicall({
 				contracts: Array.from({ length: Number(balance) }, (_, index) => ({
