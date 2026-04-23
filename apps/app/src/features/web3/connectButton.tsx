@@ -1,8 +1,9 @@
 "use client";
 
 import { Beaut } from "@0xhq/beaut";
-import { Loader2, LogOutIcon } from "lucide-react";
+import { Loader2, LogOutIcon, SettingsIcon } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
+import { useSettingsStore } from "@/features/settings/store";
 import { Box } from "@/primitives/box";
 import { Button } from "@/primitives/button";
 import { useWeb3 } from "@/providers/web3";
@@ -24,16 +25,24 @@ const LoadingButton = () => {
 
 const ConnectedButton = () => {
 	const { eoa, disconnect } = useWeb3();
+	const settingsStore = useSettingsStore();
 
 	return (
 		<Box className="flex gap-2 h-8 items-center text-sm font-medium">
-			<Box className="h-full flex justify-center items-center bg-muted rounded px-4">
+			<Box className="h-full flex justify-center items-center bg-muted rounded px-4 w-40">
 				<Box>{Beaut.address(eoa.address)}</Box>
 			</Box>
 
 			<Button
-				onClick={disconnect}
+				onClick={settingsStore.openSettingsDialog}
 				className="h-full flex justify-center items-center bg-muted rounded px-2"
+			>
+				<SettingsIcon className="size-4" />
+			</Button>
+
+			<Button
+				onClick={disconnect}
+				className="h-full flex justify-center items-center rounded transition-all px-3 bg-foreground text-background"
 			>
 				<LogOutIcon className="size-4" />
 			</Button>

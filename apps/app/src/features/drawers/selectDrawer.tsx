@@ -2,14 +2,17 @@
 
 import { PlusIcon } from "lucide-react";
 import { useDrawerStore } from "@/features/drawers/store";
+import { useEchoStore } from "@/features/echo/store";
 import { useEcho } from "@/features/web3/useEcho";
 import { Footer } from "@/layouts/footer";
 import { Box } from "@/primitives/box";
+import { Button } from "@/primitives/button";
 import { Container } from "@/primitives/container";
 import { Drawer, DrawerContent, DrawerTitle } from "@/shadcn/drawer";
 
 const SelectContent = () => {
 	const echo = useEcho();
+	const settingsStore = useEchoStore();
 
 	return (
 		<Box className="px-4 flex flex-col gap-8 mb-8">
@@ -18,11 +21,11 @@ const SelectContent = () => {
 			<Box className="h-px bg-muted" />
 
 			<Box className="grid grid-cols-5 gap-2">
-				<Box className="rounded border">
+				<Button onClick={settingsStore.openEchoCreationDialog} className="rounded border h-full">
 					<Box className="h-full flex items-center justify-center">
 						<PlusIcon className="size-21" />
 					</Box>
-				</Box>
+				</Button>
 
 				{echo.data?.map((item, _) => {
 					return (
