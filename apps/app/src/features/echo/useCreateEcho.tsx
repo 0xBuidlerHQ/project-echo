@@ -10,7 +10,7 @@ import { useWeb3 } from "@/providers/web3";
 
 type CreateEchoParams = EchoGenesis.s_Params;
 
-const useEchoCreate = () => {
+const useCreateEcho = () => {
 	const queryClient = useQueryClient();
 	const { chain, eoa } = useWeb3();
 	const echoFactoryMint = useWriteContract();
@@ -47,4 +47,4 @@ const useEchoCreate = () => {
 };
 
 export type { CreateEchoParams };
-export { useEchoCreate };
+export { useCreateEcho };

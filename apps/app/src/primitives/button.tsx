@@ -4,7 +4,7 @@ import Link from "next/link";
 import type { MouseEventHandler } from "react";
 import { cn } from "@/utils";
 
-interface ButtonBaseProps extends React.HTMLAttributes<HTMLButtonElement> {
+interface ButtonBaseProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	href?: string;
 	onClick?: MouseEventHandler<HTMLButtonElement>;
 	external?: boolean;
@@ -12,36 +12,65 @@ interface ButtonBaseProps extends React.HTMLAttributes<HTMLButtonElement> {
 }
 
 const Button = (props: ButtonBaseProps) => {
-	const { children, onClick, href, className, external, disabled } = props;
+	const {
+		children,
+		onClick,
+		href,
+		className,
+		external,
+		disabled,
+		type = "button",
+		...rest
+	} = props;
 
-	if (onClick)
+	if (href)
 		return (
-			<button
-				type="button"
+			<div
 				className={cn(
-					"group relative hover:cursor-pointer",
+					"group hover:cursor-pointer overflow-hidden",
 					className,
 					disabled && "pointer-events-none!",
 				)}
-				onClick={onClick}
 			>
-				{children}
-			</button>
+				<Link target={external ? "_blank" : undefined} href={href ?? "https://google.com"}>
+					{children}
+				</Link>
+			</div>
 		);
 
+	const onClickFct = type === "submit" ? () => {} : onClick;
 	return (
-		<div
+		<button
+			type={type}
 			className={cn(
-				"group hover:cursor-pointer overflow-hidden",
+				"group relative hover:cursor-pointer",
 				className,
 				disabled && "pointer-events-none!",
 			)}
+			onClick={onClickFct}
+			disabled={disabled}
+			{...rest}
 		>
-			<Link target={external ? "_blank" : undefined} href={href ?? "https://google.com"}>
-				{children}
-			</Link>
-		</div>
+			{children}
+		</button>
 	);
 };
 
-export { Button };
+const ButtonPrimary = (props: ButtonBaseProps) => {
+	const { className, children, ...rest } = props;
+
+	return (
+		<Button
+			className={cn(
+				"rounded-2xl bg-foreground px-4 py-3 text-background transition-opacity hover:opacity-90",
+				props.disabled && "opacity-50",
+				className,
+			)}
+			{...rest}
+		>
+			{children}
+		</Button>
+	);
+};
+
+export { Button, ButtonPrimary };
