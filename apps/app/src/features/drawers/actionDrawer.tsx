@@ -2,8 +2,7 @@
 
 import { type LucideIcon, MoveRight, Send } from "lucide-react";
 import { useDrawerStore } from "@/features/drawers/store";
-import { usePetStore } from "@/features/pet/store";
-import { usePet } from "@/features/pet/usePet";
+import { useEchoStore } from "@/features/echo/store";
 import { Footer } from "@/layouts/footer";
 import { Box } from "@/primitives/box";
 import { Button } from "@/primitives/button";
@@ -40,9 +39,7 @@ const MenuUtilItem = (props: { text: string; icon: LucideIcon }) => {
 
 const ActionContent = () => {
 	const drawerStore = useDrawerStore();
-
-	const petStore = usePetStore();
-	const petAction = usePet();
+	const echoStore = useEchoStore();
 
 	return (
 		<Box className="px-4 flex flex-col gap-8 mb-8">
@@ -55,8 +52,7 @@ const ActionContent = () => {
 					text="pet"
 					onClick={() => {
 						drawerStore.closeActionDrawer();
-						petStore.openPetActionDialog();
-						petAction.initialize();
+						echoStore.openEchoPetDialog();
 					}}
 				/>
 			</Box>

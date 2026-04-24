@@ -13,6 +13,10 @@ type UseEchoStoreState = {
 	openEchoCreationDialog: () => void;
 	closeEchoCreationDialog: () => void;
 
+	echoPetDialog: boolean;
+	openEchoPetDialog: () => void;
+	closeEchoPetDialog: () => void;
+
 	/**
 	 * Echo.
 	 */
@@ -31,6 +35,10 @@ const createStore = (address: Address) =>
 				openEchoCreationDialog: () => set({ echoCreationDialog: true }),
 				closeEchoCreationDialog: () => set({ echoCreationDialog: false }),
 
+				echoPetDialog: false,
+				openEchoPetDialog: () => set({ echoPetDialog: true }),
+				closeEchoPetDialog: () => set({ echoPetDialog: false }),
+
 				/**
 				 * Echo.
 				 */
@@ -39,7 +47,7 @@ const createStore = (address: Address) =>
 			}),
 			{
 				name: `echo-store-${address}`,
-				partialize: ({ echoCreationDialog, ...persistedState }) => persistedState,
+				partialize: ({ echoCreationDialog, echoPetDialog, ...persistedState }) => persistedState,
 				storage: createJSONStorage(() => localStorage, {
 					replacer: (_key, value) => (typeof value === "bigint" ? `${value.toString()}n` : value),
 					reviver: (_key, value) =>

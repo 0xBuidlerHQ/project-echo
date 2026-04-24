@@ -50,16 +50,19 @@ const HUDInfo = () => {
 
 	const birthEpoch = echo?.echoGenesis.birthEpoch;
 	const birthTimestampMs = birthEpoch !== undefined ? Number(birthEpoch) * 1000 : undefined;
+
 	const ageDuration = React.useMemo(() => {
 		if (birthTimestampMs === undefined) return undefined;
 
 		return formatDuration(now - birthTimestampMs);
 	}, [birthTimestampMs, now]);
+
 	const birthTimestamp = React.useMemo(() => {
 		if (birthEpoch === undefined) return "--";
 
 		return new Date(Number(birthEpoch) * 1000).toLocaleString();
 	}, [birthEpoch]);
+
 	const timeBeforeDeathDuration = React.useMemo(() => {
 		if (birthTimestampMs === undefined || !lifeCycle) {
 			if (timeBeforeDeath === undefined) return undefined;
@@ -72,6 +75,7 @@ const HUDInfo = () => {
 
 		return formatDuration(deadlineMs - now);
 	}, [birthTimestampMs, lifeCycle, now, timeBeforeDeath]);
+
 	const canPet = React.useMemo(() => {
 		if (!echo || birthTimestampMs === undefined || !isAlive || !lifeCycle) return false;
 
@@ -80,6 +84,7 @@ const HUDInfo = () => {
 
 		return Number(lifeCycle.lastPettedCycle) < currentCycle;
 	}, [birthTimestampMs, echo, isAlive, lifeCycle, now]);
+
 	const level = progress?.level.toString() ?? "--";
 	const xp = progress?.xp.toString() ?? "--";
 	const name = echo?.echoGenesis.name ?? "--";

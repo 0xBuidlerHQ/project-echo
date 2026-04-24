@@ -1,8 +1,7 @@
 import { ActionDrawer } from "@/features/drawers/actionDrawer";
 import { SelectDrawer } from "@/features/drawers/selectDrawer";
 import { EchoCreationDialog } from "@/features/echo/creationDialog";
-
-import { PetDialog } from "@/features/pet/dialog";
+import { EchoPetDialog } from "@/features/echo/petDialog";
 import { SettingsDialog } from "@/features/settings/dialog";
 
 const Globals = () => {
@@ -11,7 +10,7 @@ const Globals = () => {
 			<ActionDrawer />
 			<SelectDrawer />
 
-			<PetDialog />
+			<EchoPetDialog />
 			<SettingsDialog />
 			<EchoCreationDialog />
 		</div>
